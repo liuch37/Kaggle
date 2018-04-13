@@ -15,7 +15,7 @@ random.seed(6)
 
 print("Hi, success for importing libraries!")
 
-dataset, dataset_test = Preprocess_v1()
+dataset, dataset_test = Preprocess_v2()
 
 #Feature Randomization:
 random.shuffle(dataset)

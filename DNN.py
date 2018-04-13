@@ -8,7 +8,7 @@ from keras import initializers
 def DNN_Model (X_train, Y_train, X_valid, Y_valid, X_test):
     #Start to build deep learning model:
     #Hyperparameter List:
-    Lambd = 0.001 #L2 regularization
+    Lambd = 0.01 #L2 regularization
     Num_Neuron = 10 #Number of neurons per layer
     Batch_size = 200 #Batch size
     Epochs = 20000 #Number of epochs
