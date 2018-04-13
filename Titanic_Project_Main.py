@@ -7,6 +7,7 @@ from Data_Preprocess import Preprocess_v1, Preprocess_v2
 from DNN import DNN_Model
 from Random_Forest import RF_Model
 from AdaBoost import AdaBoost_Model
+from SVM import SVM_Model
 
 #Fix random seed for reproducibility 
 numpy.random.seed(3)
@@ -35,8 +36,9 @@ X_test = dataset_test[:,:]
 
 #Train and test with different models:
 #y = DNN_Model(X_train,Y_train,X_valid,Y_valid,X_test)
-y = RF_Model(X_train,Y_train,X_valid,Y_valid,X_test)
+#y = RF_Model(X_train,Y_train,X_valid,Y_valid,X_test)
 #y = AdaBoost_Model(X_train,Y_train,X_valid,Y_valid,X_test)
+y = SVM_Model(X_train,Y_train,X_valid,Y_valid,X_test)
 
 #Write output to output file:
 y_convert = []
