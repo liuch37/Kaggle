@@ -3,7 +3,7 @@ Kaggle competitions
 
 This repository contains several competitions in Kaggle. Will adopt several machine learning/deep learning framework in each competition and demo the results.
 
-1. Titanic: Machine Learning from Disaster https://www.kaggle.com/c/titanic
+## Titanic: Machine Learning from Disaster https://www.kaggle.com/c/titanic
 
 a) Neural network solution with Keras framework 
 
