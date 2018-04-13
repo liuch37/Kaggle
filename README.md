@@ -16,3 +16,7 @@ v1 performance: training accuracy: 100%, validation accuracy: 85.39%, test accur
 c) Adaboost solution with scikit-learn framework 
 
 v1 performance: training accuracy: 100%, validation accuracy: 88.20%, test accuracy: 71.770%
+
+d) SVM solution with scikit-learn framework 
+
+v1 performance: training accuracy: , validation accuracy: , test accuracy: 
