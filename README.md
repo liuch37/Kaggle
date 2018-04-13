@@ -19,4 +19,4 @@ v1 performance: training accuracy: 100%, validation accuracy: 88.20%, test accur
 
 d) SVM solution with scikit-learn framework 
 
-v1 performance: training accuracy: , validation accuracy: , test accuracy: 
+v1 performance: training accuracy: 92.556%, validation accuracy: 85.955%, test accuracy: 74.641%
