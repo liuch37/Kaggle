@@ -8,6 +8,7 @@ This repository contains several competitions in Kaggle. Will adopt several mach
 a) Neural network solution with Keras framework 
 
 v1 performance: training accuracy: 90.31%, validation accuracy: 85.96%, test accuracy: 75.598%
+
 v2 performance: training accuracy: 92.13%, validation accuracy: 80.90%, test accuracy: 74.641%
 
 b) Random forest solution with scikit-learn framework
@@ -21,4 +22,5 @@ v1 performance: training accuracy: 100%, validation accuracy: 88.20%, test accur
 d) SVM solution with scikit-learn framework 
 
 v1 performance: training accuracy: 92.556%, validation accuracy: 85.955%, test accuracy: 74.641%
+
 v2 performance: training accuracy: 86.79%, validation accuracy: 83.70%, test accuracy: 77.99%
