@@ -5,6 +5,8 @@ This repository contains several competitions in Kaggle. Will adopt several mach
 
 ## Titanic: Machine Learning from Disaster https://www.kaggle.com/c/titanic
 
+### Different version implies different feature engineering skills
+
 a) Neural network solution with Keras framework 
 
 v1 performance: training accuracy: 90.31%, validation accuracy: 85.96%, test accuracy: 75.598%
@@ -24,3 +26,5 @@ d) SVM solution with scikit-learn framework
 v1 performance: training accuracy: 92.556%, validation accuracy: 85.955%, test accuracy: 74.641%
 
 v2 performance: training accuracy: 86.79%, validation accuracy: 83.70%, test accuracy: 77.99%
+
+v3 performance: training accuracy: 85.11%, validation accuracy: 85.39%, test accuracy: 76.076%
