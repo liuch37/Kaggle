@@ -1,6 +1,8 @@
 #Data preprocessing functions with different feature engineering
 import numpy
 import random
+import pandas as pd
+import re
 
 random.seed(666)
 
@@ -10,8 +12,7 @@ def Preprocess_v1 ():
     #(1) Feature Convertion - convert categorical variables into floating point variables
     #(2) Feature Normalization - normalize feature to ~N(0,1)
     #(3) Feature Completion - fill the gap for missing data
-    #(4) Randomization - randomize the features
-    #(5) Test data manipulation
+    #(4) Test data manipulation
 
     #Skip passenger id and ticket number
     Cols = [1,2,5,6,7,8,9,10,12] #[Survived, Pclass, Sex, Age, SibSp, Parch, Ticket, Fare, Embarked]
@@ -126,9 +127,8 @@ def Preprocess_v2 ():
     #(b) Categorize Fare into groups by 20 bucks as duration, missing data with a random group
     #(c) Categorize name title into several groups, missing data with a random group
     #(2) Feature Normalization - normalize feature to ~N(0,1)
-    #(3) Feature Completion - fill the gap for missing data
-    #(4) Randomization - randomize the features
-    #(5) Test data manipulation
+    #(3) Feature Completion - fill the gap for missing data    
+    #(4) Test data manipulation
 
     #Skip passenger id and ticket number
     Cols = [1,2,4,5,6,7,8,10,12] #[Survived, Pclass, Name, Sex, Age, SibSp, Parch, Fare, Embarked]
@@ -250,6 +250,76 @@ def Preprocess_v2 ():
     
     print("Hi, finishing feature normalization!")
         
+    return dataset, dataset_test
+
+def Preprocess_v3 ():
+
+    #Preprocess Data in train.csv and test.csv using pandas, which includes:
+    #(1) Feature Convertion - convert categorical variables into floating point variables and do segmentation
+    #(a) Categorize age into groups by 5 years as duration, missing data with a random group
+    #(b) Categorize Fare into groups by 20 bucks as duration, missing data with a random group
+    #(c) Categorize name title into several groups, missing data with another type
+    #(2) Feature Completion - fill the gap for missing data    
+    #(3) Test data manipulation
+    dataset = pd.read_csv('./train.csv', header = 0)
+    dataset_test  = pd.read_csv('./test.csv' , header = 0)
+    # Mapping Sex
+    dataset['Sex'] = dataset['Sex'].map( {'female': 0, 'male': 1} ).astype(int)
+    dataset_test['Sex'] = dataset_test['Sex'].map( {'female': 0, 'male': 1} ).astype(int)
+    # Getting histogram for Embarked
+    EM = dataset['Embarked'].value_counts() #This is a series
+    # Mapping Embarked by filling most common type to NA
+    dataset['Embarked'] = dataset['Embarked'].fillna('S')
+    dataset_test['Embarked'] = dataset_test['Embarked'].fillna('S')
+    dataset['Embarked'] = dataset['Embarked'].map( {'S': 0, 'C': 1, 'Q': 2} ).astype(int)
+    dataset_test['Embarked'] = dataset_test['Embarked'].map( {'S': 0, 'C': 1, 'Q': 2} ).astype(int)
+    # Divide Age by 5 years as duration 
+    M_Age = dataset['Age'].mean()    
+    dataset['Age'] = dataset['Age'].fillna(M_Age)
+    dataset_test['Age'] = dataset_test['Age'].fillna(M_Age)
+    dataset['Age'] = (dataset['Age'] / 5).astype(int)
+    dataset_test['Age'] = (dataset_test['Age'] / 5).astype(int)
+    # Divide Fare by 20 as duration
+    M_Fare = dataset['Fare'].mean()
+    dataset['Fare'] = dataset['Fare'].fillna(M_Fare)
+    dataset_test['Fare'] = dataset_test['Fare'].fillna(M_Fare)
+    dataset['Fare'] = (dataset['Fare'] / 20).astype(int)
+    dataset_test['Fare'] = (dataset_test['Fare'] / 20).astype(int)
+    # Get name title
+    for idx in range(len(dataset['Name'])):
+        title_search = re.search(' ([A-Za-z]+)\.', dataset['Name'][idx])
+        title_string = title_search.group(1)
+        dataset['Name'][idx] = title_string
+    # Map name:
+    dataset['Name'] = dataset['Name'].replace(['Lady', 'Countess','Capt', 'Col','Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
+    dataset['Name'] = dataset['Name'].replace('Mlle', 'Miss')
+    dataset['Name'] = dataset['Name'].replace('Ms', 'Miss')
+    dataset['Name'] = dataset['Name'].replace('Mme', 'Mrs')
+    dataset['Name'] = dataset['Name'].map( {'Mr': 0, 'Miss': 1, 'Mrs': 2, 'Master': 3, 'Rare': 4} ).astype(int)
+    dataset['Name'].fillna(5)
+
+    for idx in range(len(dataset_test['Name'])):
+        title_search = re.search(' ([A-Za-z]+)\.', dataset_test['Name'][idx])
+        title_string = title_search.group(1)
+        dataset_test['Name'][idx] = title_string
+    # Map name:
+    dataset_test['Name'] = dataset_test['Name'].replace(['Lady', 'Countess','Capt', 'Col','Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
+    dataset_test['Name'] = dataset_test['Name'].replace('Mlle', 'Miss')
+    dataset_test['Name'] = dataset_test['Name'].replace('Ms', 'Miss')
+    dataset_test['Name'] = dataset_test['Name'].replace('Mme', 'Mrs')
+    dataset_test['Name'] = dataset_test['Name'].map( {'Mr': 0, 'Miss': 1, 'Mrs': 2, 'Master': 3, 'Rare': 4} ).astype(int)
+    dataset_test['Name'].fillna(5)
+
+    # Drop features:
+    drop_elements = ['PassengerId', 'Ticket', 'Cabin']
+    dataset = dataset.drop(drop_elements, axis = 1)
+    dataset_test = dataset_test.drop(drop_elements, axis = 1)
+
+    dataset = dataset.values
+    dataset_test = dataset_test.values
+
+    print("Hi, finishing feature cleanup and preprocessing!")
+    
     return dataset, dataset_test
 
 
