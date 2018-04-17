@@ -28,3 +28,8 @@ v1 performance: training accuracy: 92.556%, validation accuracy: 85.955%, test a
 v2 performance: training accuracy: 86.79%, validation accuracy: 83.70%, test accuracy: 77.99%
 
 v3 performance: training accuracy: 85.11%, validation accuracy: 85.39%, test accuracy: 76.076%
+
+e) K-Nearest Neighbor solution with scikit-learn framework 
+
+v3 performance: training accuracy: 92.556%, validation accuracy: 85.95%, test accuracy: 72.248%
+
